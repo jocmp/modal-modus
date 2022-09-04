@@ -11,8 +11,9 @@ Given a list of credit cards, the demo shows off how to
 - Re-route back to a card index at /cards
 - Close the modal by hitting "Go back"
 
-All state management is handled in the browser by React router, allow a user to
-re-route to a given page without losing their position after refreshing the browser.
+All state management is handled by the window location URL state
+to allow the user to visit any given page without losing their
+position after refreshing the browser or by using back navigation.
 
 ## Getting started
 
