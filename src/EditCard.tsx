@@ -21,11 +21,21 @@ function EditCard() {
         <div className="flex">
           <div className="flex flex-col mr-2">
             <label>Expiry Month</label>
-            <input className="border rounded p-1" type="text" value={card.expiry.month} />
+            <input
+              className="border rounded p-1"
+              type="text"
+              value={card.expiry.month}
+              readOnly
+            />
           </div>
           <div className="flex flex-col">
             <label>Expiry year</label>
-            <input className="border rounded p-1" type="text" value={card.expiry.year} />
+            <input
+              className="border rounded p-1"
+              type="text"
+              value={card.expiry.year}
+              readOnly
+            />
           </div>
         </div>
       </form>
