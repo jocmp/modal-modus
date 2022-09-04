@@ -2,6 +2,8 @@
 
 A routable modal demo.
 
+![Card Index](./screenshots/index-page.png)
+
 Given a list of credit cards, the demo shows off how to
 
 - Open a modal card index at /cards
@@ -11,7 +13,6 @@ Given a list of credit cards, the demo shows off how to
 
 All state management is handled in the browser by React router, allow a user to
 re-route to a given page without losing their position after refreshing the browser.
-
 
 ## Getting started
 
