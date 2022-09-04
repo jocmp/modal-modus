@@ -6,9 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import Modal from 'react-modal';
 
-const rootElement = document.getElementById('root') as HTMLElement
-const root = ReactDOM.createRoot(rootElement);
-Modal.setAppElement(rootElement);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+Modal.setAppElement(document.getElementById('modal-root') as HTMLElement);
 
 root.render(
   <React.StrictMode>

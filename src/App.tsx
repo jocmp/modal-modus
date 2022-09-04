@@ -8,10 +8,11 @@ import Layout from './Layout';
 function App() {
   return (
     <Routes>
-      <Route index element={<Layout />} />
-      <Route path="cards" element={<CardModal />}>
-        <Route index element={<CardIndex />} />
-        <Route path=":id" element={<EditCard />} />
+      <Route path="/" element={<Layout />} >
+        <Route path="cards" element={<CardModal />}>
+          <Route index element={<CardIndex />} />
+          <Route path=":id" element={<EditCard />} />
+        </Route>
       </Route>
     </Routes>
   );

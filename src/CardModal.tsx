@@ -8,6 +8,7 @@ function CardModal() {
       style={{
           content: {
             maxWidth: "40rem",
+            maxHeight: "40rem",
           }
         }
       }
