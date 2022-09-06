@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import { creditCards } from "./database";
+import { useAllCards } from "./database";
 
 function CardIndex() {
+  const creditCards = useAllCards();
+
   return (
     <ul className="list-none">
       {creditCards.map(creditCard => (

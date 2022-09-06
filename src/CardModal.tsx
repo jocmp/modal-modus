@@ -15,6 +15,7 @@ function CardModal() {
     >
       <Outlet />
       <div className="mt-2">
+        
         <Link className="underline" to="/">
           Go back
         </Link>

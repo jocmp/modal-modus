@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { creditCards } from "./database";
+import { useAllCards } from "./database";
 
 function EditCard() {
   const card = useCard();
@@ -50,6 +50,7 @@ function EditCard() {
 
 function useCard() {
   const params = useParams();
+  const creditCards = useAllCards();
   return creditCards.find(card => card.id === params.id);
 }
 

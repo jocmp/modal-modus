@@ -1,4 +1,6 @@
-export const creditCards = [
+import React from "react";
+
+const records = [
   {
     id: "1",
     expiry: {
@@ -33,3 +35,22 @@ export const creditCards = [
     }
   }
 ];
+
+function useCards() {
+  const [cards, setCards] = React.useState(records);
+  return { cards, setCards };
+}
+
+export function useAllCards() {
+  const { cards } = useCards();
+  return cards;
+}
+
+export function useUpdateCard(id: string) {
+  const { setCards } = useCards();
+
+  function updateCard(input: { expiryMonth: string, expiryYear: string }) {
+  }
+
+  return updateCard;
+}
