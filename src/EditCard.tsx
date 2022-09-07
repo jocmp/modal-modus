@@ -1,56 +1,83 @@
-import { Link, useParams } from "react-router-dom";
-import { creditCards } from "./database";
+import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useModalForm } from "./CardModal";
+import * as Database from './database';
 
 function EditCard() {
-  const card = useCard();
+  const form = useModalForm();
+  const { card, save, setMonth, setYear } = useUpdateCard();
 
-  if (!card) {
+  if (!card.id) {
     return (
       <div>
         Card not found
       </div>
     );
   }
-
   return (
-    <div>
+    <form id={form.id} onSubmit={save}>
       <div className="text-xl font-medium">
         Editing {card.display.summary}
       </div>
-      <form>
-        <div className="flex">
-          <div className="flex flex-col mr-2">
-            <label>Expiry Month</label>
-            <input
-              className="border rounded p-1"
-              type="text"
-              value={card.expiry.month}
-              readOnly
-            />
-          </div>
-          <div className="flex flex-col">
-            <label>Expiry year</label>
-            <input
-              className="border rounded p-1"
-              type="text"
-              value={card.expiry.year}
-              readOnly
-            />
-          </div>
+      <div className="flex">
+        <div className="flex flex-col mr-2">
+          <label>Expiry Month</label>
+          <input
+            className="border rounded p-1"
+            type="text"
+            value={card.expiry.month}
+            onChange={setMonth}
+          />
         </div>
-      </form>
-      <div className="mt-1">
-        <Link className="underline" to="/cards">
-          Show all
-        </Link>
+        <div className="flex flex-col">
+          <label>Expiry year</label>
+          <input
+            className="border rounded p-1"
+            type="text"
+            value={card.expiry.year}
+            onChange={setYear}
+          />
+        </div>
       </div>
-    </div>
+    </form>
   );
 }
 
-function useCard() {
+function useUpdateCard() {
   const params = useParams();
-  return creditCards.find(card => card.id === params.id);
+  const navigate = useNavigate();
+  const id = params?.id || '';
+  const updateCard = Database.useUpdateCard(id);
+  const card = Database.useCard(id);
+  const [expiry, setExpiry] = React.useState<Database.CardExpiry>({ month: '', year: '', ...card?.expiry });
+
+  function setMonth(event: any) {
+    setExpiry(prev => ({ ...prev, month: event.target.value }));
+  }
+
+  function setYear(event: any) {
+    setExpiry(prev => ({ ...prev, year: event.target.value }));
+  }
+
+  function save(event: any) {
+    event.preventDefault();
+    console.log('submitting....');
+
+    updateCard(expiry);
+
+    navigate(`/?saved-card-id=${id}`)
+  }
+
+  return {
+    card: {
+      id,
+      display: { summary: '', expiry: '' },
+      expiry,
+    },
+    setYear,
+    setMonth,
+    save,
+  };
 }
 
 export default EditCard;
