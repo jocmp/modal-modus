@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useModalForm } from "./CardModal";
 import * as Database from './database';
 
@@ -44,8 +44,8 @@ function EditCard() {
 }
 
 function useUpdateCard() {
+  const form = useModalForm();
   const params = useParams();
-  const navigate = useNavigate();
   const id = params?.id || '';
   const updateCard = Database.useUpdateCard(id);
   const card = Database.useCard(id);
@@ -65,7 +65,7 @@ function useUpdateCard() {
 
     updateCard(expiry);
 
-    navigate(`/?saved-card-id=${id}`)
+    form.onSelect(id);
   }
 
   return {

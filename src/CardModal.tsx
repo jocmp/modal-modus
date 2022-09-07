@@ -1,8 +1,9 @@
 import Modal from 'react-modal';
-import { Link, Outlet, useMatch, useOutletContext, useParams } from 'react-router-dom';
+import { Link, Outlet, useMatch, useNavigate, useOutletContext, useParams } from 'react-router-dom';
 
 interface Form {
   id: string;
+  onSelect: (cardID: string) => void;
 }
 
 function CardModal() {
@@ -52,10 +53,16 @@ export function useModalForm() {
 function useForm() {
   const id = useParams()?.id;
   const editPath = useMatch(`/cards/${id}`);
+  const navigate = useNavigate();
+
+  function onSelect(cardID: string) {
+    navigate(`/?saved-card-id=${cardID}`)
+  }
 
   if (editPath) {
     return {
-      id: 'card-edit-form'
+      id: 'card-edit-form',
+      onSelect,
     };
   }
 
